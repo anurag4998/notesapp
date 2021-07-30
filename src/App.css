@@ -126,7 +126,8 @@ form
 {
     min-height: 100px;
     cursor: pointer;
-
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 .color--palette
 {
