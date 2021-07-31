@@ -13,6 +13,7 @@ const Note = (props) => {
     const[showPallete, togglePallete] = useState(false);
     const[showOptions, toggleShowOptions] = useState(false);
     const[modalState, toggleModalState] = useState(false);
+    const[hideNote, sethideNote] = useState(false);
     let backGroundColor = useSelector((state) => {
         let note = state.find(x => x.id === props.noteprops.id);
         return note.color;
@@ -38,11 +39,11 @@ const Note = (props) => {
         togglePallete(false);
     }
 
-    const handleShowOptions = (event) => {
+    const handleShowNoteOptions = (event) => {
         toggleShowOptions(true);
     }
 
-    const handleHideOptions = (event) => {
+    const handleHideNoteOptions = (event) => {
         toggleShowOptions(false);    
     }
 
@@ -52,17 +53,19 @@ const Note = (props) => {
 
     const showModal = () => {
         toggleModalState(true);
+        sethideNote(true);
     }
     const hideModal = () => {
         toggleModalState(false);
+        sethideNote(false);
     }
     const handleDelete = () => {
         dispatch(removeNote(props.noteprops.id));
     }
     return(
         <Fragment>
-            <div>
-                <div className = {`note ${backGroundColor}`}  onMouseOver = {handleShowOptions} onMouseLeave = {handleHideOptions} >
+           {!hideNote ?  <div>
+                <div className = {`note ${backGroundColor}`}  onMouseOver = {handleShowNoteOptions} onMouseLeave = {handleHideNoteOptions} >
                     <div className = "note__title">
                         {props.noteprops.title} 
                     </div>
@@ -83,7 +86,7 @@ const Note = (props) => {
                         <Pallete show = {showPallete} changeColor = {changebackgroundColor}/> 
                     </div>  
                 </div>
-            </div>
+            </div> : undefined}
             <Modal show={modalState} handleClose={hideModal} id = {props.noteprops.id} title = {props.noteprops.title} description = {props.noteprops.description} color = {backGroundColor} />
             
         </Fragment>
