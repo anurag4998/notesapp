@@ -15,7 +15,6 @@ const Note = (props) => {
     const[modalState, toggleModalState] = useState(false);
     let backGroundColor = useSelector((state) => {
         let note = state.find(x => x.id === props.noteprops.id);
-        //console.log(note.color)
         return note.color;
     })
 
@@ -64,30 +63,29 @@ const Note = (props) => {
         <Fragment>
             <div>
                 <div className = {`note ${backGroundColor}`}  onMouseOver = {handleShowOptions} onMouseLeave = {handleHideOptions} >
-                    <div className = "notetitle">
+                    <div className = "note__title">
                         {props.noteprops.title} 
                     </div>
-                    <span style = {{cursor:"pointer"}} className =  {showOptions ?   "pin showOptions" : "hideOptions"} onClick = {togglePinState}>
+                    <span style = {{cursor:"pointer"}} className =  {showOptions ?   "note__pin note--showoptions" : "note--hideoptions"} onClick = {togglePinState}>
                         {isPinned ? <RiPushpin2Fill/> : <RiPushpin2Line/>}
                     </span>
-                    <div className = "notetext"  onClick = {showModal}>
+                    <div className = "note__text"  onClick = {showModal}>
                             {props.noteprops.description}
                     </div>
                 
-                    <div className = {showOptions ?   "footer showOptions" : "footer hideOptions"}>
-                        <button className = "footer--btn" ><IoColorPaletteOutline onMouseEnter = {handleShowPallete} onMouseLeave = {handleHidePallete}/></button>
-                        <button className = "footer--btn" onClick = {handleDelete}><MdDelete/></button>
-                        <button className = "footer--btn"><BiArchiveIn/></button>
-                        <button onClick = {showModal} className = "footer--btn"><MdEdit/></button>
+                    <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
+                        <button className = "footer__btn" ><IoColorPaletteOutline onMouseEnter = {handleShowPallete} onMouseLeave = {handleHidePallete}/></button>
+                        <button className = "footer__btn" onClick = {handleDelete}><MdDelete/></button>
+                        <button className = "footer__btn"><BiArchiveIn/></button>
+                        <button onClick = {showModal} className = "footer__btn"><MdEdit/></button>
                     </div>
-                    <div className = "palette-container" >
+                    <div className = "palette__container" >
                         <Pallete show = {showPallete} changeColor = {changebackgroundColor}/> 
                     </div>  
                 </div>
-        </div>
-        <Modal show={modalState} handleClose={hideModal} id = {props.noteprops.id} title = {props.noteprops.title} description = {props.noteprops.description} color = {backGroundColor}>
+            </div>
+            <Modal show={modalState} handleClose={hideModal} id = {props.noteprops.id} title = {props.noteprops.title} description = {props.noteprops.description} color = {backGroundColor} />
             
-        </Modal>
         </Fragment>
         
         
