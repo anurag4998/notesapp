@@ -1,0 +1,68 @@
+.note {
+  min-width: 200px;
+  max-width: 200px;
+  margin: 1.6rem;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 0.8rem;
+  text-align: left;
+  padding: 0.8rem 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  white-space: pre;
+  padding-bottom: 0.4rem;
+}
+.note__title {
+  max-width: 100%;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.note:hover {
+  box-shadow: 0rem 0.3px 0.7rem #e1e1e1;
+}
+.note__text {
+  min-height: 10rem;
+  cursor: pointer;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.note__pin {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1.6rem;
+}
+
+.note--showoptions {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.note--hideoptions {
+  opacity: 0;
+  height: 0;
+}
+
+////////////////////////////////////////////////
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  min-height: 3rem;
+  margin-top: 1rem;
+}
+
+.footer__btn {
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: 0.8rem;
+}

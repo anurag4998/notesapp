@@ -1,0 +1,22 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html
+{
+    font-size: 62.5%;
+}
+
+body {
+    color: #000;
+    overflow-x: hidden !important;
+    font-weight: 500;
+}
+
+.col-3 
+{
+  padding-left: 0px !important;
+  padding-right: 5px !important;
+}
