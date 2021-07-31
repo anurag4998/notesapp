@@ -18,6 +18,9 @@
   text-align: left;
   word-wrap: break-word;
   white-space: pre-wrap;
+  font-size: 1.6rem;
+  font-weight: 400;
+
 }
 .note:hover {
   box-shadow: 0rem 0.3px 0.7rem #e1e1e1;
@@ -65,4 +68,13 @@
   font-size: 2rem;
   cursor: pointer;
   margin-right: 0.8rem;
+}
+
+////////////////////////////// 
+
+.palette__container {
+  bottom: 3rem;
+  left: 10%;
+  position: absolute;
+  z-index: 4000;
 }
