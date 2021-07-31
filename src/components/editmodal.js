@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editNote } from "../redux";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { BiArchiveIn } from "react-icons/bi";
-
+import {editNote,removeNote} from '../redux'
 import Pallete from "./pallete";
 
 const EditModal = (props) => {
@@ -27,6 +26,15 @@ const EditModal = (props) => {
   const handleHidePallete = (event) => {
     togglePallete(false);
   };
+
+  const handleDelete = () => {
+    dispatch(removeNote(props.id));
+  }
+
+  const changebackgroundColor = (backColor) => {
+    console.log(backColor)
+    dispatch(editNote(props.id, {color:backColor}));
+}
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -51,32 +59,32 @@ const EditModal = (props) => {
           id={"edittitle" + props.id}
           onKeyDown={handleKeyPress}
           placeholder="Title"
-          className={`${showScroll} ? modal__edit-title modal--editable modal--isScrollable ${props.color}: modal__edit-title modal--editable ${props.color}`}
+          className={`${showScroll ? `modal__edit-title modal--editable modal--isScrollable ${props.color}`: `modal__edit-title modal--editable ${props.color}`}`}
           defaultValue={props.title}
         ></textarea>
         <textarea
           id={"editdescription" + props.id}
           onKeyDown={handleKeyPress}
           placeholder="Add your note here"
-          className={`${showScroll} ? modal__edit-description modal--editable modal--isScrollable ${props.color}: modal__edit-description modal--editable ${props.color}`}
+          className={`${showScroll ? `modal__edit-description modal--editable modal--isScrollable ${props.color}`: `modal__edit-description modal--editable ${props.color}`}`}
           defaultValue={props.description}
         ></textarea>
-        <div className="footer showOptions">
-          <button className="footer--btn">
+        <div className="modal__footer">
+          <button className="modal__footer-btn">
             <IoColorPaletteOutline
               onMouseEnter={handleShowPallete}
               onMouseLeave={handleHidePallete}
             />
           </button>
-          <button className="footer--btn">
+          <button className="modal__footer-btn" onClick = {handleDelete}>
             <MdDelete />
           </button>
-          <button className="footer--btn">
+          <button className="modal__footer-btn">
             <BiArchiveIn />
           </button>
         </div>
-        <div className="palette-container">
-          <Pallete show={showPallete} />
+        <div className="modal__palette palette__container">
+          <Pallete show={showPallete} changeColor = {changebackgroundColor}/>
         </div>
         <button className="modal-btn" onClick={closeModal}>
           Close
