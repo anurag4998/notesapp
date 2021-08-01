@@ -2,13 +2,10 @@ import React, { Fragment,useState } from 'react'
 import {addNote,swapNote} from '../redux'
 import {connect} from 'react-redux'
 import Note from './note'
-import AddData from './addData'
 
-import {  useHistory } from "react-router-dom";
 
 const Home = (props) => {
     const [dragId, setDragId] = useState();
-    const history = useHistory();
 
     const handleDrag = (ev) => {
         setDragId(ev.currentTarget.id);
@@ -16,14 +13,9 @@ const Home = (props) => {
     const handleDrop = (event) => {
         props.swapNote(dragId, event.currentTarget.id)
     }   
-    const archive = () => {
-        let path = `archived`
-        history.push(path)
-    }
+  
     return(
-        <Fragment>
-            <button onClick = {archive}>Archived</button>
-            <AddData/>
+        <Fragment>           
             <div className = "notes-container" >
                 {props.notes.length > 0 ? props.notes.sort((a,m) => a.order-m.order).map((note,index) => {
                     return(

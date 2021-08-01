@@ -1,5 +1,5 @@
 import './App.css';
-import Home from './components/home'
+import Dashboard from './components/dashboard'
 import Archived from './components/archived'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -10,8 +10,8 @@ function App() {
     <BrowserRouter>
       <Switch>
           <Provider store = {store}>
-            <Route exact path = "/" component = {Home} />
-            <Route exact path = "/archived" component = {Archived} />
+            <Route exact path = "/" component = {Dashboard} />
+            <Route exact path = "/archive" component = {Archived} />
         </Provider>
       </Switch>
     </BrowserRouter>
