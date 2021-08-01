@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { BiArchiveIn } from "react-icons/bi";
-import {editNote,removeNote} from '../redux'
+import { editNote, removeNote,editArchivedNote } from "../redux";
 import Pallete from "./pallete";
 
 const EditModal = (props) => {
@@ -12,13 +12,28 @@ const EditModal = (props) => {
   const [showPallete, togglePallete] = useState(false);
 
   const closeModal = () => {
-    let title = document.getElementById("edittitle" + props.id);
-    let description = document.getElementById("editdescription" + props.id);
-    dispatch(
-      editNote(props.id, { title: title.value, description: description.value })
+    let title = document.getElementById("edittitle" + props.noteprops.id);
+    let description = document.getElementById(
+      "editdescription" + props.noteprops.id
     );
+    dispatch(
+      editNote(props.noteprops.id, {
+        title: title.value,
+        description: description.value,
+      })
+    );
+
+    if(props.archived)
+    dispatch(
+      editArchivedNote(props.noteprops.id, {
+        title: title.value,
+        description: description.value,
+      })
+    );
+    
     props.handleClose();
   };
+
   const handleShowPallete = (event) => {
     togglePallete(true);
   };
@@ -29,12 +44,14 @@ const EditModal = (props) => {
 
   const handleDelete = () => {
     dispatch(removeNote(props.id));
-  }
+  };
 
   const changebackgroundColor = (backColor) => {
-    console.log(backColor)
-    dispatch(editNote(props.id, {color:backColor}));
-}
+    dispatch(editNote(props.noteprops.id, { color: backColor }));
+    if(props.archived)
+      dispatch(editArchivedNote(props.noteprops.id, { color: backColor }));
+
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -54,20 +71,28 @@ const EditModal = (props) => {
         props.show ? "modal modal--display-block" : "modal modal--display-none"
       }
     >
-      <section className={`modal__wrapper ${props.color}`}>
+      <section className={`modal__wrapper ${props.noteprops.color}`}>
         <textarea
-          id={"edittitle" + props.id}
+          id={"edittitle" + props.noteprops.id}
           onKeyDown={handleKeyPress}
           placeholder="Title"
-          className={`${showScroll ? `modal__edit-title modal--editable modal--isScrollable ${props.color}`: `modal__edit-title modal--editable ${props.color}`}`}
-          defaultValue={props.title}
+          className={`${
+            showScroll
+              ? `modal__edit-title modal--editable modal--isScrollable ${props.noteprops.color}`
+              : `modal__edit-title modal--editable ${props.noteprops.color}`
+          }`}
+          defaultValue={props.noteprops.title}
         ></textarea>
         <textarea
-          id={"editdescription" + props.id}
+          id={"editdescription" + props.noteprops.id}
           onKeyDown={handleKeyPress}
           placeholder="Add your note here"
-          className={`${showScroll ? `modal__edit-description modal--editable modal--isScrollable ${props.color}`: `modal__edit-description modal--editable ${props.color}`}`}
-          defaultValue={props.description}
+          className={`${
+            showScroll
+              ? `modal__edit-description modal--editable modal--isScrollable ${props.noteprops.color}`
+              : `modal__edit-description modal--editable ${props.noteprops.color}`
+          }`}
+          defaultValue={props.noteprops.description}
         ></textarea>
         <div className="modal__footer">
           <button className="modal__footer-btn">
@@ -76,7 +101,7 @@ const EditModal = (props) => {
               onMouseLeave={handleHidePallete}
             />
           </button>
-          <button className="modal__footer-btn" onClick = {handleDelete}>
+          <button className="modal__footer-btn" onClick={handleDelete}>
             <MdDelete />
           </button>
           <button className="modal__footer-btn">
@@ -84,7 +109,7 @@ const EditModal = (props) => {
           </button>
         </div>
         <div className="modal__palette palette__container">
-          <Pallete show={showPallete} changeColor = {changebackgroundColor}/>
+          <Pallete show={showPallete} changeColor={changebackgroundColor} />
         </div>
         <button className="modal-btn" onClick={closeModal}>
           Close

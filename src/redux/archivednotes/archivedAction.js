@@ -6,9 +6,15 @@ export const addToArchives = (notes) =>
 });
 
 export const deleteFromArchives = (id) => {
-    console.log(id);
     return{
-      type: 'ADDTO_ARCHIVES',
+      type: 'DELETEFROM_ARCHIVES',
       id
     }
   };
+
+export const editArchivedNote = (id, updates) => {
+    return{
+    type: 'EDIT_ARCHIVEDNOTE',
+    id,
+    updates
+  }};
