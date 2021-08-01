@@ -23,7 +23,7 @@ const Adddata = (props) => {
                     props.addNote(formElement.getElementsByClassName("addnote__title")[0].value,formElement.getElementsByClassName("addnote__body")[0].value , props.notes.length)
 
                 let element = document.getElementById("addnote__body");
-                element.style.height = 30 + "px";
+                element.style.height = 40 + "px";
                 handleShow(false)
             } 
         }
