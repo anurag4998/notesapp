@@ -1,15 +1,21 @@
 import './App.css';
 import Home from './components/home'
+import Archived from './components/archived'
+import { BrowserRouter, Route, Switch , Redirect} from "react-router-dom";
 
 import {Provider} from 'react-redux'
 import store from './redux/store'
 function App() { 
   return (
-    <Provider store = {store}>
-      <div className="App">
-          <Home />
-      </div>
-    </Provider>
+    <BrowserRouter>
+      <Switch>
+          <Provider store = {store}>
+            <Route exact path = "/" component = {Home} />
+            <Route exact path = "/archived" component = {Archived} />
+        </Provider>
+      </Switch>
+    </BrowserRouter>
+   
     
   );
 }
