@@ -1,0 +1,28 @@
+.dashboard
+{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
+
+.dashboard-notes__wrapper
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .addnotes__wrapper
+    {
+        width: 100%;
+        margin: 3rem 0;
+    }
+}
+
+.notes-container {
+    margin: 50px auto;
+    width: 80%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+  }
