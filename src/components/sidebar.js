@@ -22,7 +22,7 @@ const Sidebar = () => {
     return (
         <div className = 'sidebar sidebar__container'>
             <div className = 'sidebar__options'>
-                <div className = 'sidebar__option ' id = 'rDash'  role = 'button' onClick = {handleRedirectToDashboard}>
+                <div className = 'sidebar__option sidebar__option--selected' id = 'rDash'  role = 'button' onClick = {handleRedirectToDashboard}>
                     <AiOutlineBulb />
                     <span> Notes</span>
                 </div>
