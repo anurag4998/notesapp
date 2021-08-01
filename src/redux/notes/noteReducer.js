@@ -1,5 +1,4 @@
 const initialState = [];
-// Expenses Reducer
 
 
 const notereducer =  (state = initialState, action) => {
