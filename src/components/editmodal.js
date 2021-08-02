@@ -137,7 +137,7 @@ const EditModal = (props) => {
           </div>
         )}
         {!props.noteprops.isDeleted ? (
-          <div className="palette__container">
+          <div className="modal__palette palette__container">
             <Pallete show={showPallete} changeColor={changebackgroundColor} />
           </div>
         ) : undefined}
