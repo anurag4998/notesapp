@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import { BiArchiveIn } from "react-icons/bi";
-import { editNote, removeNote,editArchivedNote } from "../redux";
+import { BiArchiveIn,BiArchiveOut } from "react-icons/bi";
+import { editNote, removeNote } from "../redux";
 import Pallete from "./pallete";
 
 const EditModal = (props) => {
@@ -22,15 +22,6 @@ const EditModal = (props) => {
         description: description.value,
       })
     );
-
-    if(props.archived)
-    dispatch(
-      editArchivedNote(props.noteprops.id, {
-        title: title.value,
-        description: description.value,
-      })
-    );
-    
     props.handleClose();
   };
 
@@ -48,11 +39,13 @@ const EditModal = (props) => {
 
   const changebackgroundColor = (backColor) => {
     dispatch(editNote(props.noteprops.id, { color: backColor }));
-    if(props.archived)
-      dispatch(editArchivedNote(props.noteprops.id, { color: backColor }));
-
   };
-
+  const handleClicktoArchive = () => {
+    dispatch(editNote(props.noteprops.id, {isArchived : true}));
+  }
+  const handleClicktoUnArchive = () => {
+    dispatch(editNote(props.noteprops.id, {isArchived : false}));
+  }
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       let triggerer = event.target.id;
@@ -104,9 +97,10 @@ const EditModal = (props) => {
           <button className="modal__footer-btn" onClick={handleDelete}>
             <MdDelete />
           </button>
-          <button className="modal__footer-btn">
-            <BiArchiveIn />
-          </button>
+          {!props.noteprops.isArchived ? 
+            <button className = "footer__btn" onClick = {handleClicktoArchive}><BiArchiveIn/></button> : 
+            <button className = "footer__btn" onClick = {handleClicktoUnArchive}><BiArchiveOut/></button> 
+        }
         </div>
         <div className="modal__palette palette__container">
           <Pallete show={showPallete} changeColor={changebackgroundColor} />

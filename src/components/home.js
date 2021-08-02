@@ -17,12 +17,14 @@ const Home = (props) => {
     return(
         <Fragment>           
             <div className = "notes-container" >
-                {props.notes.length > 0 ? props.notes.sort((a,m) => a.order-m.order).map((note,index) => {
-                    return(
-                        <div key = {index} id = {note.id} draggable={true} onDragOver={(ev) => ev.preventDefault()} onDragStart={handleDrag} onDrop = {handleDrop}>
-                            <Note noteprops = {note} />
-                        </div>
-                    )   
+                {props.notes.length > 0 ? props.notes.sort((a,m) => a.order-m.order).filter(x => x.isArchived === false).map((note,index) => {
+                    
+                        return(
+                                <div key = {index} id = {note.id} draggable={true} onDragOver={(ev) => ev.preventDefault()} onDragStart={handleDrag} onDrop = {handleDrop}>
+                                    <Note noteprops = {note} />
+                                </div>
+                        )   
+                   
                 }):undefined}
             </div>
         </Fragment>
@@ -31,7 +33,7 @@ const Home = (props) => {
 const mapStateToProps = state => {
     console.log(state)
     return{
-        notes:state.notes
+        notes:state
     }
 }
 const mapDispatchToProps = dispatch => {

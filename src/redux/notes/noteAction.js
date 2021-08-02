@@ -11,7 +11,8 @@ export const addNote = (notes) =>
     title:notes.title,
     order: notes.order,
     color: 'white',
-    isPinned: false
+    isPinned: false,
+    isArchived: false
   }
 });
 
