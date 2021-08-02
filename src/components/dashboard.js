@@ -6,9 +6,6 @@ const Dashboard = () => {
 
     return(
         <div className = 'dashboard'>
-            <div className = 'sidebar__wrapper'>
-                <Sidebar/>
-            </div>
             <div className = 'dashboard-notes__wrapper'>
                 <div className = 'addnotes__wrapper'>
                     <Addbar/>
