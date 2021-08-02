@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import {editNote,removeNote} from '../redux'
 import { FaTrashRestoreAlt } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/animations/scale.css';
 
 const Note = (props) => {
 
@@ -92,13 +95,24 @@ const Note = (props) => {
                     </div>
                     {!props.noteprops.isDeleted ? 
                         <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
-                            <button className = "footer__btn" ><IoColorPaletteOutline onMouseEnter = {handleShowPallete} onMouseLeave = {handleHidePallete}/></button>
-                            <button className = "footer__btn" onClick = {handleDelete}><MdDelete/></button>
+                                <Tippy placement="bottom"  content={'Change Color'} theme={'blue'}>
+                                        <button className = "footer__btn" ><IoColorPaletteOutline onMouseEnter = {handleShowPallete} onMouseLeave = {handleHidePallete}/></button>
+                                </Tippy>
+                                <Tippy placement="bottom" content={'Delete'} theme={'blue'} >
+                                        <button className = "footer__btn" onClick = {handleDelete}><MdDelete/></button>
+                                </Tippy>
+                           
                             {!props.noteprops.isArchived ? 
-                                <button className = "footer__btn" onClick = {handleClicktoArchive}><BiArchiveIn/></button> : 
-                                <button className = "footer__btn" onClick = {handleClicktoUnArchive}><BiArchiveOut/></button> 
+                                <Tippy placement="bottom" content={'Archive'} theme={'blue'} >
+                                    <button className = "footer__btn" onClick = {handleClicktoArchive}><BiArchiveIn/></button>
+                                </Tippy> : 
+                                <Tippy placement="bottom" content={'Unarchive'} theme={'blue'} >
+                                    <button className = "footer__btn" onClick = {handleClicktoUnArchive}><BiArchiveOut/></button> 
+                                </Tippy> 
                             }
-                            <button onClick = {showModal} className = "footer__btn"><MdEdit/></button>
+                            <Tippy placement="bottom" content={'Edit'} theme={'blue'}>
+                                <button onClick = {showModal} className = "footer__btn"><MdEdit/></button>
+                            </Tippy> 
                         </div> 
                     : 
                         <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
