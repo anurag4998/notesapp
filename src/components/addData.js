@@ -43,8 +43,9 @@ const Adddata = (props) => {
         let title = e.target.addnote__title.value;
         let body = e.target.addnote__body.value;
         let order = props.notes.length
-        props.addNote(title,body,order);
-      
+        if(title || body)
+            props.addNote(title,body,order);
+        handleShow(false);
     }
     const handleKeyPress = (event) =>{
 
