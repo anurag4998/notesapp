@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import { BiArchiveIn,BiArchiveOut } from "react-icons/bi";
+import { BiArchiveIn, BiArchiveOut } from "react-icons/bi";
 import { editNote, removeNote } from "../redux";
 import Pallete from "./pallete";
+import { FaTrashRestoreAlt } from "react-icons/fa";
+import { IoTrashSharp } from "react-icons/io5";
 
 const EditModal = (props) => {
   const dispatch = useDispatch();
@@ -34,17 +36,28 @@ const EditModal = (props) => {
   };
 
   const handleDelete = () => {
-    dispatch(removeNote(props.id));
+    dispatch(
+      editNote(props.noteprops.id, { isDeleted: true, deletedAt: Date.now() })
+    );
+    //dispatch(removeNote(props.id));
   };
 
   const changebackgroundColor = (backColor) => {
     dispatch(editNote(props.noteprops.id, { color: backColor }));
   };
   const handleClicktoArchive = () => {
-    dispatch(editNote(props.noteprops.id, {isArchived : true}));
-  }
+    dispatch(editNote(props.noteprops.id, { isArchived: true }));
+  };
   const handleClicktoUnArchive = () => {
-    dispatch(editNote(props.noteprops.id, {isArchived : false}));
+    dispatch(editNote(props.noteprops.id, { isArchived: false }));
+  };
+  const handleRestore = () => {
+    dispatch(
+      editNote(props.noteprops.id, { isDeleted: false, deletedAt: null })
+    );
+  };
+  const handlePermanentDelete = () =>{
+        
   }
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -87,24 +100,47 @@ const EditModal = (props) => {
           }`}
           defaultValue={props.noteprops.description}
         ></textarea>
-        <div className="modal__footer">
-          <button className="modal__footer-btn">
-            <IoColorPaletteOutline
-              onMouseEnter={handleShowPallete}
-              onMouseLeave={handleHidePallete}
-            />
-          </button>
-          <button className="modal__footer-btn" onClick={handleDelete}>
-            <MdDelete />
-          </button>
-          {!props.noteprops.isArchived ? 
-            <button className = "footer__btn" onClick = {handleClicktoArchive}><BiArchiveIn/></button> : 
-            <button className = "footer__btn" onClick = {handleClicktoUnArchive}><BiArchiveOut/></button> 
-        }
-        </div>
-        <div className="modal__palette palette__container">
-          <Pallete show={showPallete} changeColor={changebackgroundColor} />
-        </div>
+        {!props.noteprops.isDeleted ? (
+          <div className="modal__footer">
+            <button className="modal__footer-btn">
+              <IoColorPaletteOutline
+                onMouseEnter={handleShowPallete}
+                onMouseLeave={handleHidePallete}
+              />
+            </button>
+            <button className="modal__footer-btn" onClick={handleDelete}>
+              <MdDelete />
+            </button>
+            {!props.noteprops.isArchived ? (
+              <button
+                className="modal__footer-btn"
+                onClick={handleClicktoArchive}
+              >
+                <BiArchiveIn />
+              </button>
+            ) : (
+              <button
+                className="modal__footer-btn"
+                onClick={handleClicktoUnArchive}
+              >
+                <BiArchiveOut />
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="modal__footer">
+            <button className="modal__footer-btn" onClick={handleRestore}>
+              {" "}
+              <FaTrashRestoreAlt />{" "}
+            </button>
+            <button className = "footer__btn" onClick = {handlePermanentDelete} > <IoTrashSharp/>  </button>
+          </div>
+        )}
+        {!props.noteprops.isDeleted ? (
+          <div className="palette__container">
+            <Pallete show={showPallete} changeColor={changebackgroundColor} />
+          </div>
+        ) : undefined}
         <button className="modal-btn" onClick={closeModal}>
           Close
         </button>

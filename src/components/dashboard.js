@@ -1,5 +1,4 @@
 import React from 'react'
-import Sidebar from './sidebar'
 import Addbar from './addData'
 import Home from './home'
 const Dashboard = () => {

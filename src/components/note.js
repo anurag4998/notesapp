@@ -7,6 +7,8 @@ import { RiPushpin2Line,RiPushpin2Fill } from "react-icons/ri";
 import Modal from './editmodal'
 import { useSelector, useDispatch } from 'react-redux'
 import {editNote,removeNote} from '../redux'
+import { FaTrashRestoreAlt } from "react-icons/fa";
+import { IoTrashSharp } from "react-icons/io5";
 
 const Note = (props) => {
 
@@ -59,7 +61,8 @@ const Note = (props) => {
         sethideNote(false);
     }
     const handleDelete = () => {
-        dispatch(removeNote(props.noteprops.id));
+        dispatch(editNote(props.noteprops.id, {isDeleted:true, deletedAt: Date.now()}));
+        //dispatch(removeNote(props.noteprops.id));
     }
 
     const handleClicktoArchive = () => {
@@ -67,6 +70,12 @@ const Note = (props) => {
     }
     const handleClicktoUnArchive = () => {
         dispatch(editNote(props.noteprops.id, {isArchived : false}));
+    }
+    const handleRestore = () => {
+        dispatch(editNote(props.noteprops.id, {isDeleted:false, deletedAt: null}));
+    }
+    const handlePermanentDelete = () =>{
+        
     }
     return(
         <Fragment>
@@ -81,19 +90,28 @@ const Note = (props) => {
                     <div className = "note__text"  onClick = {showModal}>
                             {props.noteprops.description}
                     </div>
-                
-                    <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
-                        <button className = "footer__btn" ><IoColorPaletteOutline onMouseEnter = {handleShowPallete} onMouseLeave = {handleHidePallete}/></button>
-                        <button className = "footer__btn" onClick = {handleDelete}><MdDelete/></button>
-                        {!props.noteprops.isArchived ? 
-                            <button className = "footer__btn" onClick = {handleClicktoArchive}><BiArchiveIn/></button> : 
-                            <button className = "footer__btn" onClick = {handleClicktoUnArchive}><BiArchiveOut/></button> 
-                        }
-                        <button onClick = {showModal} className = "footer__btn"><MdEdit/></button>
-                    </div>
+                    {!props.noteprops.isDeleted ? 
+                        <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
+                            <button className = "footer__btn" ><IoColorPaletteOutline onMouseEnter = {handleShowPallete} onMouseLeave = {handleHidePallete}/></button>
+                            <button className = "footer__btn" onClick = {handleDelete}><MdDelete/></button>
+                            {!props.noteprops.isArchived ? 
+                                <button className = "footer__btn" onClick = {handleClicktoArchive}><BiArchiveIn/></button> : 
+                                <button className = "footer__btn" onClick = {handleClicktoUnArchive}><BiArchiveOut/></button> 
+                            }
+                            <button onClick = {showModal} className = "footer__btn"><MdEdit/></button>
+                        </div> 
+                    : 
+                        <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
+                            <button className = "footer__btn" onClick = {handleRestore}> <FaTrashRestoreAlt/> </button>
+                            <button className = "footer__btn" onClick = {handlePermanentDelete} > <IoTrashSharp/>  </button>
+                        </div>
+                    }
+                {!props.noteprops.isDeleted ?
                     <div className = "palette__container" >
                         <Pallete show = {showPallete} changeColor = {changebackgroundColor}/> 
-                    </div>  
+                    </div>
+                : undefined
+                }  
                 </div>
             </div> : undefined}
             <Modal show={modalState} handleClose={hideModal} noteprops = {props.noteprops} />

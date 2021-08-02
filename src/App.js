@@ -2,6 +2,7 @@ import './App.css';
 import Dashboard from './components/dashboard'
 import Archived from './components/archived'
 import Sidebar from './components/sidebar'
+import Deleted from './components/deleted'
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -19,6 +20,7 @@ function App() {
               </div>
               <Route exact path = "/" component = {Dashboard} />
               <Route exact path = "/archive" component = {Archived} />
+              <Route exact path = "/deleted" component = {Deleted} />
           </div>
            
         </Provider>

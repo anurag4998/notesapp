@@ -12,7 +12,9 @@ export const addNote = (notes) =>
     order: notes.order,
     color: 'white',
     isPinned: false,
-    isArchived: false
+    isArchived: false,
+    isDeleted: false,
+    deletedAt: null
   }
 });
 

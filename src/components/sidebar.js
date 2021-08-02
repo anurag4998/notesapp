@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {  useHistory } from "react-router-dom";
-import { BiArchiveIn } from "react-icons/bi";
+import { BiArchiveIn,BiTrash } from "react-icons/bi";
 import { AiOutlineBulb } from "react-icons/ai";
 let classes = document.getElementsByClassName('sidebar__option');
 
@@ -34,6 +34,20 @@ const Sidebar = () => {
         let path = `/`
         history.push(path)
     }
+
+    const handleRedirectToDeleted = (event) => {
+        for(let i = 0 ; i < classes.length; i++)
+        {   
+            if(classes[i].classList.contains('sidebar__option'))
+            {
+                classes[i].classList.remove('sidebar__option--selected');
+            } 
+        }
+        let tab = document.getElementById(event.target.id);
+        tab.classList.add('sidebar__option--selected');
+        let path = `/deleted`
+        history.push(path)
+    }
     const history = useHistory();
 
     return (
@@ -47,6 +61,10 @@ const Sidebar = () => {
                 <div className = 'sidebar__option' role = 'button' id = 'rArch' onClick = {handleRedirectToArchive}>
                     <BiArchiveIn style = {{pointerEvents: 'none'}}/>
                     <span style = {{pointerEvents: 'none'}}> Archive</span>
+                </div>
+                <div className = 'sidebar__option' role = 'button' id = 'rTrash' onClick = {handleRedirectToDeleted}>
+                    <BiTrash style = {{pointerEvents: 'none'}}/>
+                    <span style = {{pointerEvents: 'none'}}> Trash</span>
                 </div>
             </div>
         </div>

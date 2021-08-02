@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import Note from './note'
 
-const Archived = () => {
-    let archivedNotes = useSelector((state) => {
+const Deleted = () => {
+    let deletedNotes = useSelector((state) => {
         let notes = state.filter(x => x.id !== null)
         return notes;
     })
@@ -12,7 +12,7 @@ const Archived = () => {
           <div className = 'archive'>
                 <div className = 'archive__wrapper'>
                     <div className = 'archive__container'>
-                            {archivedNotes.length > 0 ? archivedNotes.filter(x => x.isArchived === true && x.isDeleted === false).map( (note,index) => {
+                            {deletedNotes.length > 0 ? deletedNotes.filter( x => x.isDeleted === true).map( (note,index) => {
                                     return(
                                         <div key = {index}>
                                             <Note noteprops = {note} />
@@ -26,4 +26,4 @@ const Archived = () => {
     )
 }
 
-export default Archived;
+export default Deleted;
