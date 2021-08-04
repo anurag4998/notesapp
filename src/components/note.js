@@ -6,7 +6,7 @@ import { BiArchiveIn ,BiArchiveOut} from "react-icons/bi";
 import { RiPushpin2Line,RiPushpin2Fill } from "react-icons/ri";
 import Modal from './editmodal'
 import { useSelector, useDispatch } from 'react-redux'
-import {editNote,removeNote} from '../redux'
+import {editNote} from '../redux'
 import { FaTrashRestoreAlt } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
 import Tippy from '@tippyjs/react';

@@ -6,14 +6,39 @@
 }
 .archive__wrapper
 {
-    height: 90vh;
+    height: 100%;
     width: 100%;
 }
 
 .archive__container
 {
     width: 80%;
-    margin : 5rem auto;
+    height: 80%;
+    margin: 0 auto;
+    padding: 5rem 0;
+   
+}
+.archive__empty
+{
     @include flex;
-    justify-content: left;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    .archive__empty-icon
+    {
+        font-size: 10rem;
+        color:#333;
+        opacity: 0.4;
+    }
+
+    .archive__empty-text
+    {
+        font-size: 2rem;
+        padding-top: 2rem;
+        opacity: 0.5;
+    }
+}
+.archive__container--center
+{
+    justify-content: center;
 }

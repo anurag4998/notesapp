@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import Note from './note'
+import { BiArchiveIn } from "react-icons/bi";
 
 const Archived = () => {
     let archivedNotes = useSelector((state) => {
@@ -18,7 +19,12 @@ const Archived = () => {
                                             <Note noteprops = {note} />
                                         </div>
                                     )  
-                            }):undefined}
+                            }):
+                            <div className = 'archive__empty archive__container--center' >
+                                <BiArchiveIn className = 'archive__empty-icon'/>
+                                <h1  className = 'archive__empty-text'> Your Archived notes Appear Here</h1>
+                            </div>
+                        }
                     </div>
                  </div>
             </div>
