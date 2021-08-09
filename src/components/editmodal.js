@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { BiArchiveIn, BiArchiveOut } from "react-icons/bi";
-import { editNote, removeNote } from "../redux";
+import {StartEditNote,startDeletePermanently} from '../redux'
 import Pallete from "./pallete";
 import { FaTrashRestoreAlt } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
@@ -14,12 +14,12 @@ const EditModal = (props) => {
   const [showPallete, togglePallete] = useState(false);
 
   const closeModal = () => {
-    let title = document.getElementById("edittitle" + props.noteprops.id);
+    let title = document.getElementById("edittitle" + props.noteprops._id);
     let description = document.getElementById(
-      "editdescription" + props.noteprops.id
+      "editdescription" + props.noteprops._id
     );
     dispatch(
-      editNote(props.noteprops.id, {
+      StartEditNote(props.noteprops._id, {
         title: title.value,
         description: description.value,
       })
@@ -37,27 +37,37 @@ const EditModal = (props) => {
 
   const handleDelete = () => {
     dispatch(
-      editNote(props.noteprops.id, { isDeleted: true, deletedAt: Date.now() })
+      StartEditNote(props.noteprops._id, { isDeleted: true, deletedAt: Date.now() })
     );
-    //dispatch(removeNote(props.id));
+    props.handleClose();
+
   };
 
   const changebackgroundColor = (backColor) => {
-    dispatch(editNote(props.noteprops.id, { color: backColor }));
+    dispatch(StartEditNote(props.noteprops._id, { color: backColor }));
   };
+  
   const handleClicktoArchive = () => {
-    dispatch(editNote(props.noteprops.id, { isArchived: true }));
+    dispatch(StartEditNote(props.noteprops._id, { isArchived: true }));
+    props.handleClose();
+
   };
   const handleClicktoUnArchive = () => {
-    dispatch(editNote(props.noteprops.id, { isArchived: false }));
+    dispatch(StartEditNote(props.noteprops._id, { isArchived: false }));
+    props.handleClose();
+
   };
   const handleRestore = () => {
     dispatch(
-      editNote(props.noteprops.id, { isDeleted: false, deletedAt: null })
+      StartEditNote(props.noteprops._id, { isDeleted: false, deletedAt: null })
     );
+    props.handleClose();
+
   };
   const handlePermanentDelete = () =>{
-        
+    dispatch(startDeletePermanently(props.noteprops._id));
+    props.handleClose();
+
   }
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -79,7 +89,7 @@ const EditModal = (props) => {
     >
       <section className={`modal__wrapper ${props.noteprops.color}`}>
         <textarea
-          id={"edittitle" + props.noteprops.id}
+          id={"edittitle" + props.noteprops._id}
           onKeyDown={handleKeyPress}
           placeholder="Title"
           className={`${
@@ -90,7 +100,7 @@ const EditModal = (props) => {
           defaultValue={props.noteprops.title}
         ></textarea>
         <textarea
-          id={"editdescription" + props.noteprops.id}
+          id={"editdescription" + props.noteprops._id}
           onKeyDown={handleKeyPress}
           placeholder="Add your note here"
           className={`${

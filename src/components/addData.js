@@ -1,5 +1,5 @@
 import React, {useEffect, useState , useRef} from 'react'
-import {addNote,swapNote} from '../redux'
+import {startAddNote} from '../redux'
 import {connect} from 'react-redux'
 
 const Adddata = (props) => {
@@ -20,7 +20,7 @@ const Adddata = (props) => {
                 console.log(show + "method ")
                 let formElement  = document.getElementById("form");
                 if(formElement.getElementsByClassName("addnote__body")[0].value ||  formElement.getElementsByClassName("addnote__title")[0].value)
-                    props.addNote(formElement.getElementsByClassName("addnote__title")[0].value,formElement.getElementsByClassName("addnote__body")[0].value , props.notes.length)
+                    props.startAddNote(formElement.getElementsByClassName("addnote__title")[0].value,formElement.getElementsByClassName("addnote__body")[0].value , props.notes.length)
 
                 let element = document.getElementById("addnote__body");
                 element.style.height = 40 + "px";
@@ -44,7 +44,7 @@ const Adddata = (props) => {
         let body = e.target.addnote__body.value;
         let order = props.notes.length
         if(title || body)
-            props.addNote(title,body,order);
+            props.startAddNote(title,body,order);
         handleShow(false);
     }
     const handleKeyPress = (event) =>{
@@ -72,13 +72,12 @@ const Adddata = (props) => {
 
 const mapStateToProps = state => {
     return{
-        notes:state
+        notes:state.notes
     }
 }
 const mapDispatchToProps = dispatch => {
     return{
-        addNote:(title,description,order) => dispatch(addNote({title,description,order})),
-        swapNote:(draggedId, droppedId) => dispatch(swapNote(draggedId,droppedId ))
+        startAddNote:(title,description,order) => dispatch(startAddNote({title,description,order}))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Adddata);

@@ -5,7 +5,7 @@ import { BiArchiveIn } from "react-icons/bi";
 
 const Archived = () => {
     let archivedNotes = useSelector((state) => {
-        let notes = state.filter(x => x.id !== null)
+        let notes = state.notes.filter(x => x.id !== null)
         return notes;
     })
     return(

@@ -1,4 +1,5 @@
-export {addNote} from './notes/noteAction'
-export {removeNote} from './notes/noteAction'
-export {editNote} from './notes/noteAction'
-export {swapNote} from './notes/noteAction'
+export { fetchNotes } from "./notes/noteAction";
+export { startAddNote } from "./notes/noteAction";
+export { StartEditNote } from "./notes/noteAction";
+export { startDeletePermanently } from "./notes/noteAction";
+export { startSwapNote } from "./notes/noteAction";
