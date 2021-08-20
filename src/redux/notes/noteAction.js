@@ -1,18 +1,18 @@
 import axios from "axios";
 
-export const addNote = (notes) => ({
+const addNote = (notes) => ({
   type: "ADD_NOTE",
   note: notes,
 });
 
-export const removeNote = (id) => {
+const removeNote = (id) => {
   return {
     type: "DELETE_NOTE",
     id,
   };
 };
 
-export const editNote = (id, updates) => {
+const editNote = (id, updates) => {
   return {
     type: "EDIT_NOTE",
     id,
@@ -20,7 +20,7 @@ export const editNote = (id, updates) => {
   };
 };
 
-export const swapNote = (draggedID, droppedID) => {
+const swapNote = (draggedID, droppedID) => {
   return {
     type: "SWAP_NOTE",
     draggedID,
@@ -28,15 +28,21 @@ export const swapNote = (draggedID, droppedID) => {
   };
 };
 
-export const setNotes = (notes) => {
+const setNotes = (notes) => {
   return {
     type: "SET_NOTES",
     notes,
   };
 };
+const readToken = async () => {
+  let cookies = document.cookie.split("; ");
+  const token = cookies.find((cookies) => cookies.startsWith("notesapp"));
+  return token.split1("=")[];
+};
 ////////////////////////////////////////////////////////////////////////////////
 export const startAddNote = (notes) => {
   return async (dispatch) => {
+    let token = await readToken();
     let note = {
       description: notes.description,
       title: notes.title,
@@ -46,10 +52,13 @@ export const startAddNote = (notes) => {
       isArchived: false,
       isDeleted: false,
       deletedAt: null,
-      owner: "610af6a552e627225027e023",
     };
     try {
-      let noteCreated = await axios.post("http://localhost:5000/notes", note);
+      let noteCreated = await axios.post("http://localhost:5000/notes", note, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       noteCreated = noteCreated.data;
       dispatch(addNote({ id: noteCreated._id, ...noteCreated }));
     } catch (e) {
@@ -60,8 +69,13 @@ export const startAddNote = (notes) => {
 
 export const fetchNotes = () => {
   return async (dispatch) => {
+    let token = await readToken();
     try {
-      let notes = await axios.get("http://localhost:5000/notes");
+      let notes = await axios.get("http://localhost:5000/notes", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       notes = notes.data;
       dispatch(setNotes(notes));
     } catch (e) {
@@ -72,10 +86,15 @@ export const fetchNotes = () => {
 
 export const StartEditNote = (id, updates) => {
   return async (dispatch) => {
+    let token = await readToken();
     try {
       let note = await axios.put("http://localhost:5000/notes", {
         id,
         updates,
+      },{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       dispatch(editNote(id, updates));
     } catch (e) {
@@ -86,9 +105,14 @@ export const StartEditNote = (id, updates) => {
 
 export const startDeletePermanently = (id) => {
   return async (dispatch) => {
+    let token = await readToken();
     try {
       console.log(id);
-      let note = await axios.delete("http://localhost:5000/notes/" + id);
+      let note = await axios.delete("http://localhost:5000/notes/" + id,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(removeNote(id));
     } catch (e) {
       console.log(e);
@@ -98,10 +122,16 @@ export const startDeletePermanently = (id) => {
 
 export const startSwapNote = (draggedID, droppedID) => {
   return async (dispatch) => {
+    let token = await readToken();
     try {
+      console.log(draggedID, droppedID);
       let note = await axios.put("http://localhost:5000/notes/reorder", {
         draggedID,
         droppedID,
+      },{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       dispatch(swapNote(note.data.draggednote._id, note.data.droppednote._id));

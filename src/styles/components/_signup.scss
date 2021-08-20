@@ -1,0 +1,81 @@
+
+.signup__wrapper
+{
+    @include flex;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: $gradient-color2;
+    background-image: linear-gradient(
+    160deg,
+    $gradient-color2 0%,
+    $gradient-color1 46%,
+    #ffcc70 100%);
+}
+.signup__container
+{
+    @include flex-column;
+    width: 50rem;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 3rem;
+}
+
+.signup__form
+{
+    @include flex-column;
+    font-size: 2rem;  
+    padding: 5rem 0 6rem 0 ;
+}
+
+.signup__form-heading
+{
+    font-size: 3.5rem;
+    font-family: 'Poppins', sans-serif;
+    padding: 5rem 0;
+    font-weight: 600;
+}   
+.signup__input-container
+{
+    position: relative;
+    .signupform__input
+        {
+            height: 5rem;
+            width: 30rem;
+            padding: 2rem;
+            padding-left: 4rem;
+            font-weight: 500;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #d9d9d9;
+            margin-bottom: 2rem;   
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;            
+        }
+}
+.signup__input-container-icon
+{
+  position: absolute;
+  top: 1.5rem;
+  left: 0.5rem;
+  font-size: 2rem;
+  z-index: 5;
+}
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+  }
+
+.pwdcontainer
+{
+    position: relative;
+}
+.signupform__togglepwd
+{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+.signup__form__submitbtn
+{
+
+}

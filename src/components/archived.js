@@ -1,11 +1,15 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Note from './note'
 import { BiArchiveIn } from "react-icons/bi";
 
 const Archived = () => {
+
+    useEffect(() => {
+        
+    })
     let archivedNotes = useSelector((state) => {
-        let notes = state.notes.filter(x => x.id !== null)
+        let notes = state.notes.notes.filter(x => x.id !== null)
         return notes;
     })
     return(

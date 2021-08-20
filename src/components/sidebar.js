@@ -15,7 +15,6 @@ const Sidebar = () => {
             } 
         }
         let tab = document.getElementById(event.target.id);
-        console.log(tab)
         tab.classList.add('sidebar__option--selected');
         let path = `archive`
         history.push(path)

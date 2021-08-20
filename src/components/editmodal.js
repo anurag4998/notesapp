@@ -80,6 +80,16 @@ const EditModal = (props) => {
       if (length > 80) setShowScroll(true);
       else setShowScroll(false);
     }
+
+    if(event.key === "Backspace")
+    {
+      console.log(2);
+    }
+    if(event.key === "Backspace" && event.type === "keyup" )
+    {
+            console.log("keyup");
+
+    }
   };
   return (
     <div
@@ -102,6 +112,7 @@ const EditModal = (props) => {
         <textarea
           id={"editdescription" + props.noteprops._id}
           onKeyDown={handleKeyPress}
+          onKeyUp = {handleKeyPress}
           placeholder="Add your note here"
           className={`${
             showScroll

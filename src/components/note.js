@@ -22,12 +22,12 @@ const Note = (props) => {
     const[hideNote, sethideNote] = useState(false);
 
     let backGroundColor = useSelector((state) => {
-            let note = state.notes.find(x => x._id === props.noteprops._id);
+            let note = state.notes.notes.find(x => x._id === props.noteprops._id);
             return note.color;
     })
 
     let isPinned = useSelector((state) => {
-            let note = state.notes.find(x => x._id === props.noteprops._id);
+            let note = state.notes.notes.find(x => x._id === props.noteprops._id);
             return note.isPinned;
     })
     const dispatch = useDispatch();
@@ -66,7 +66,6 @@ const Note = (props) => {
     }
     const handleDelete = () => {
         dispatch(StartEditNote(props.noteprops._id, {isDeleted:true, deletedAt: Date.now()}));
-        //dispatch(removeNote(props.noteprops.id));
     }
 
     const handleClicktoArchive = () => {
