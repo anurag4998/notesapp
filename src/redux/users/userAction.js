@@ -83,7 +83,7 @@ export const logout = () => {
   return async (dispatch) => {
       try {
         let token = await readToken();
-        await axios.post( prodUrl + "/user/logout",{token},{
+        await axios.post( prodUrl + "user/logout",{token},{
           headers: {
             Authorization: `Bearer ${token}`,
           },
