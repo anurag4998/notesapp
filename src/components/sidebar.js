@@ -6,7 +6,7 @@ let classes = document.getElementsByClassName('sidebar__option');
 
 const Sidebar = () => {
     useEffect(() => {
-         let  a = (window.location.href.split('/'));
+         let a = (window.location.href.split('app/'));
          for(let i = 0 ; i < classes.length; i++)
         {
             if(classes[i].classList.contains('sidebar__option'))
