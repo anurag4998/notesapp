@@ -16,6 +16,11 @@
 //     )
 
 // }
+// mongodb+srv://notesapi:Xhv02WvmC9kn39qQ@cluster0.uaky4.mongodb.net/notesapi?retryWrites=true
+// mongodb://127.0.0.1:27017/notes
+MONGODB_URL=mongodb+srv://notesapi:Xhv02WvmC9kn39qQ@cluster0.uaky4.mongodb.net/notesapi?retryWrites=true
+JWT_SECRET_KEY=antidisestablishmentarianism
+PORT=5000
 
 // // const mapDispatchToProps = dispatch => {
 // //     return{
