@@ -34,10 +34,17 @@ const setNotes = (notes) => {
     notes,
   };
 };
+
+const filterNotes = (searchString) => {
+    return {
+        type: "FILTER_NOTES",
+        searchString
+    };
+}
 const readToken = async () => {
   let cookies = document.cookie.split("; ");
   const token = cookies.find((cookies) => cookies.startsWith("notesapp"));
-  return token.split1("=")[];
+  return token.split("=")[1];
 };
 ////////////////////////////////////////////////////////////////////////////////
 export const startAddNote = (notes) => {
@@ -88,7 +95,7 @@ export const StartEditNote = (id, updates) => {
   return async (dispatch) => {
     let token = await readToken();
     try {
-      let note = await axios.put("http://localhost:5000/notes", {
+      await axios.put("http://localhost:5000/notes", {
         id,
         updates,
       },{
@@ -108,7 +115,7 @@ export const startDeletePermanently = (id) => {
     let token = await readToken();
     try {
       console.log(id);
-      let note = await axios.delete("http://localhost:5000/notes/" + id,{
+        await axios.delete("http://localhost:5000/notes/" + id,{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -140,3 +147,33 @@ export const startSwapNote = (draggedID, droppedID) => {
     }
   };
 };
+
+export const searchNotes = (searchString) => 
+{
+    return async (dispatch) => {
+        dispatch(filterNotes(searchString));
+    }
+}
+
+export const startCopyNote = (note) => {
+  //console.log(note)
+  return async (dispatch) => {
+    let token = await readToken();
+    note.createdAt = Date.now();
+    delete note._id;
+    console.log(note) 
+    // try {
+    //   let noteCreated = await axios.post("http://localhost:5000/notes", note, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   noteCreated = noteCreated.data;
+    //   dispatch(addNote({ id: noteCreated._id, ...noteCreated }));
+    // } catch (e) {
+    //   console.log(e);
+    // }
+  }
+ 
+
+}

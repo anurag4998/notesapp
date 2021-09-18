@@ -9,12 +9,12 @@ const notereducer = (state = initialState, action) => {
     case "ADD_NOTE":
       return { ...state, notes: [...state.notes, action.note] };
 
-    case "DELETE_NOTE":
-      return {
-        ...state,
-        notes: state.notes.filter(({ _id }) => _id !== action.id),
-      };
 
+    case "DELETE_NOTE":
+        return{
+          ...state,
+          notes:state.notes.filter(({_id}) => _id !== action.id)
+        }
     case "EDIT_NOTE": {
       return {
         ...state,
@@ -41,8 +41,14 @@ const notereducer = (state = initialState, action) => {
       return { ...state, notes: state.notes.filter((x) => x._id !== null) };
     }
 
-    case "SET_NOTES":
+    case "SET_NOTES":{
       return { ...state, notes: action.notes };
+
+    }
+
+    case "FILTER_NOTES": {
+      return {...state,filteredText:action.searchString}
+    }
 
     default:
       return state;
