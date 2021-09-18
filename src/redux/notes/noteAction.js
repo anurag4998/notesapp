@@ -1,5 +1,6 @@
 import axios from "axios";
-
+let prodUrl = "https://anurag-gkeep.herokuapp.com/"
+let devUrl = "http://localhost:5000/"
 const addNote = (notes) => ({
   type: "ADD_NOTE",
   note: notes,
@@ -61,7 +62,7 @@ export const startAddNote = (notes) => {
       deletedAt: null,
     };
     try {
-      let noteCreated = await axios.post("http://localhost:5000/notes", note, {
+      let noteCreated = await axios.post( prodUrl + "notes", note, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -78,7 +79,7 @@ export const fetchNotes = () => {
   return async (dispatch) => {
     let token = await readToken();
     try {
-      let notes = await axios.get("http://localhost:5000/notes", {
+      let notes = await axios.get(prodUrl + "notes", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -95,7 +96,7 @@ export const StartEditNote = (id, updates) => {
   return async (dispatch) => {
     let token = await readToken();
     try {
-      await axios.put("http://localhost:5000/notes", {
+      await axios.put(prodUrl + "notes", {
         id,
         updates,
       },{
@@ -115,7 +116,7 @@ export const startDeletePermanently = (id) => {
     let token = await readToken();
     try {
       console.log(id);
-        await axios.delete("http://localhost:5000/notes/" + id,{
+        await axios.delete(prodUrl + "notes/" + id,{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -132,7 +133,7 @@ export const startSwapNote = (draggedID, droppedID) => {
     let token = await readToken();
     try {
       console.log(draggedID, droppedID);
-      let note = await axios.put("http://localhost:5000/notes/reorder", {
+      let note = await axios.put(prodUrl + "notes/reorder", {
         draggedID,
         droppedID,
       },{
