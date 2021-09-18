@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { BiShow , BiHide} from "react-icons/bi";
 import {FcAddressBook,FcPrivacy, FcBusinessContact, FcPodiumWithSpeaker} from "react-icons/fc"
-import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { Link } from "react-router-dom";
+import { useDispatch,useSelector } from 'react-redux'
 import {startSignup} from '../redux'
+import { FaQuoteLeft } from "react-icons/fa";
+import swal from 'sweetalert';
+import {useHistory } from "react-router-dom";
 
-// import swal from 'sweetalert';
 
 const Signup = ()  => {
     const dispatch = useDispatch();
+    let history = useHistory()
 
+    let user = useSelector((state) => {
+        let user = state.user;
+        return user;
+    })
     const handleShowPassword = (e) => {
         let a = document.getElementById("password");
         setShowPwd(!showPwd)
         a.type === "password" ? a.type = "text" : a.type = "password";
     }
     const [disabled, setDisabled] = useState(false);
-    let [flag, setFlag] = useState({});
     let[showPwd,setShowPwd] = useState(true)
     let [showError, setShowError] = useState(false)
-
-    const history = useHistory();
-    const handleRedirect = () => {
-        let path = ``; 
-        history.push(path);
-    }
-
     const handleSubmit = async(e) => {
         e.preventDefault();
         setDisabled(true)
@@ -37,27 +36,33 @@ const Signup = ()  => {
         setShowError(true)
         setDisabled(false)
         setTimeout( () => setShowError(false) , 3000 )
-
+        if(!user.error)
+        {
+            swal({
+                title: "Success",
+                text: "Your account has been created",
+                icon: "success",
+                showCancelButton: false,
+                showConfirmButton: false
+              });
+              history.push("/dashboard");
+        }
+       
     }
-    useEffect(() => {
-        // if(flag.response === true){
-        //     swal("Account Created!", "Verify email to continue", "success");
-        //     document.getElementById("Name").value = "";
-        //     document.getElementById("username").value = "";
-        //     document.getElementById("email").value = "";
-        //     document.getElementById("password").value = "";
-        //     let path = ``; 
-        //     history.push(path);
-        // }
-           
-    })
+    useEffect( () => () =>  null, [] );
+
     return(
+
+        <section>
         <div className = 'signup__wrapper'>
              <div className = 'signup__container'>    
-                <h1 className='signup__form-heading'>Signup</h1>
+                <h1 className='signup__form__heading'>Signup</h1>
+                <p className = 'signup__form__subheading'>
+                        Already have an account?
+                        <Link to = "/" className="redirect" > Sign In</Link>
+                </p>
                 <form onSubmit={handleSubmit} className='signup__form'> 
-                    <h5>{flag.response === false && showError === true ? flag.error : undefined }</h5>
-
+                    {user.error != null && showError === true ? <div className='signupform__errormsg'>  {user.error.errorMsg} </div>: undefined}
                     <div className = "signup__input-container">
                         <span className="signup__input-container-icon">  <FcBusinessContact /> </span>                   
                         <input type='text' id = "Name" className='signupform__input' placeholder='Name' name="Name" autoComplete="off" required></input>
@@ -81,12 +86,22 @@ const Signup = ()  => {
                          </div>
                     </div>  
                     <button className='signup__form__submitbtn btn-press' id='Submit' disabled={disabled}>Submit</button>
-                    <button className="Loginsignupbtn" ><span> Joined us before? </span> <span className="Loginsignupbtn--textdeco" onClick={handleRedirect}>Login</span></button>
 
                 </form>
             </div>
         </div>
+        <div className = 'reviews'>
+            <p>
+                <FaQuoteLeft/>
+                 Keep is a simple, yet satisfying note-taking app. It’s great for getting random notes down quickly, and organizes them pretty well, too.
+            </p>
+            
+        </div>
+        </section>
+
     )
 }
 
 export default Signup   
+
+// <button className="Loginsignupbtn" ><span> Joined us before? </span> <span className="Loginsignupbtn--textdeco" onClick={handleRedirect}>Login</span></button>

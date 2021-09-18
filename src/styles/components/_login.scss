@@ -1,0 +1,112 @@
+.login__wrapper {
+  @include flex;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f5f5f7;
+  font-family: "Roboto", sans-serif;
+
+}
+.login__container {
+  @include flex-column;
+  width: 40rem;
+  border-radius: 1rem;
+  padding: 3rem;
+  background: white;
+}
+
+.login__form {
+  @include flex-column;
+  font-size: 2rem;
+  padding: 5rem 0 2.5rem 0;
+}
+
+.login__form__heading {
+  font-size: 3rem;
+  padding: 3.5rem 0 1.8rem 0;
+  font-weight: 600;
+  color:#33334F;
+}
+.login__form__subheading {
+  font-size: 1.5rem;
+  @include flex-column;
+  color: #7171A6;
+  font-weight: 500;
+}
+.loginform__input {
+  height: 5rem;
+  width: 30rem;
+  padding: 2rem;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
+}
+.submitbtn {
+  width: 30rem;
+  height: 4rem;
+  margin-top: 2.5rem;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  background-color: #6078ff;
+  color: floralwhite;
+  font-size: 1.5rem;
+}
+input:focus {
+  border-color: #6078ff;
+}
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+.pwdcontainer {
+  position: relative;
+}
+.loginform__togglepwd {
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
+  cursor: pointer;
+}
+.logincontainer__forgotpwd {
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #6078ff;
+}
+.loginform__errormsg {
+    height: 5rem;
+    width: 30rem;
+    padding: 2rem;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    border: 1px solid #d9d9d9;
+    margin-bottom: 2rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.3rem;
+    border-radius: 0.4rem;
+    background-color: #f4e4ec;
+    color: #E84C85;
+}
+
+.redirect {
+  text-decoration: none;
+  display: inline;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #6078ff;
+}
+/////////////////////////////////////////////////////////@include
+@media screen and (max-width: 500px) {
+  .logincontainer {
+    width: 95vw;
+  }
+}
