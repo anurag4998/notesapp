@@ -3,10 +3,11 @@ import Pallete from './pallete'
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdDelete,MdEdit } from "react-icons/md";
 import { BiArchiveIn ,BiArchiveOut} from "react-icons/bi";
+import { AiOutlineCopy } from "react-icons/ai";
 import { RiPushpin2Line,RiPushpin2Fill } from "react-icons/ri";
 import Modal from './editmodal'
 import { useSelector, useDispatch } from 'react-redux'
-import {StartEditNote,startDeletePermanently} from '../redux'
+import {StartEditNote,startDeletePermanently,startCopyNote} from '../redux'
 import { FaTrashRestoreAlt } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
 import Tippy from '@tippyjs/react';
@@ -55,7 +56,9 @@ const Note = (props) => {
     const togglePinState = () => {
            dispatch(StartEditNote(props.noteprops._id, {isPinned :!isPinned}));
     }
-
+    const handleCopy = () => {
+        dispatch(startCopyNote(props.noteprops));
+    }
     const showModal = () => {
         toggleModalState(true);
         sethideNote(true);
@@ -65,7 +68,7 @@ const Note = (props) => {
         sethideNote(false);
     }
     const handleDelete = () => {
-        dispatch(StartEditNote(props.noteprops._id, {isDeleted:true, deletedAt: Date.now()}));
+        dispatch(StartEditNote(props.noteprops._id, {isDeleted:true, isArchived:false, deletedAt: Date.now()}));
     }
 
     const handleClicktoArchive = () => {
@@ -82,8 +85,7 @@ const Note = (props) => {
             buttons: {
                 cancel: "no",
                 success:"yes"
-        }}).
-        then(() => {
+        }}).then(() => {
             dispatch(startDeletePermanently(props.noteprops._id));
 
         }).catch(() => {
@@ -91,14 +93,18 @@ const Note = (props) => {
     }
     return(
         <Fragment>
-           {!hideNote ?  <div>
+           {!hideNote ?  
+            <div>
                 <div className = {`note ${backGroundColor}`}  onMouseOver = {handleShowNoteOptions} onMouseLeave = {handleHideNoteOptions} >
                     <div className = "note__title">
                         {props.noteprops.title} 
                     </div>
-                    <span style = {{cursor:"pointer"}} className =  {showOptions ?   "note__pin note--showoptions" : "note--hideoptions"} onClick = {togglePinState}>
-                        {isPinned ? <RiPushpin2Fill/> : <RiPushpin2Line/>}
-                    </span>
+                    {!props.noteprops.isDeleted ?
+                        <span style = {{cursor:"pointer"}} className =  {showOptions ?   "note__pin note--showoptions" : "note--hideoptions"} onClick = {togglePinState}>
+                            {isPinned ? <RiPushpin2Fill/> : <RiPushpin2Line/>}
+                        </span> : undefined
+                    }
+                   
                     <div className = "note__text"  onClick = {showModal}>
                             {props.noteprops.description}
                     </div>
@@ -122,6 +128,9 @@ const Note = (props) => {
                             <Tippy placement="bottom" content={'Edit'} theme={'blue'}>
                                 <button onClick = {showModal} className = "footer__btn"><MdEdit/></button>
                             </Tippy> 
+                            <Tippy placement="bottom" content={'Copy'} theme={'blue'}>
+                                <button onClick = {handleCopy} className = "footer__btn"><AiOutlineCopy/></button>
+                            </Tippy> 
                         </div> 
                     : 
                         <div className = {showOptions ?   "footer note--showoptions" : "footer note--hideoptions"}>
@@ -136,7 +145,8 @@ const Note = (props) => {
                 : undefined
                 }  
                 </div>
-            </div> : undefined}
+            </div> : 
+            undefined}
             <Modal show={modalState} handleClose={hideModal} noteprops = {props.noteprops} />
             
         </Fragment>

@@ -3,15 +3,10 @@
 // // import {connect} from 'react-redux'
 // // import { useSelector, useDispatch } from 'react-redux'
 
-// const Test = (props) => {
-//     let a = useSelector((state) =>
-//             state.numOfCakes
         
 //     )
 //     //const dispatch = useDispatch(); //use - dispatch(buyCake)
 
-//     return(
-//         <Fragment>
            
 //             <h3>Counter value - {props.numOfCakes}</h3>
 //             <button onClick = {props.buyCake}>Click me</button>
@@ -21,14 +16,6 @@
 //     )
 
 // }
-// export default Test
-//  // !-- <h3>{a}</h3> --!
-// // const mapStateToProps = state => {
-// //     console.log(state)
-// //     return{
-// //         numOfCakes:state.numOfCakes
-// //     }
-// // }
 
 // // const mapDispatchToProps = dispatch => {
 // //     return{

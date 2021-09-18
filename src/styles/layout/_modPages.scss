@@ -1,44 +1,46 @@
-.archive 
+.modnotes 
 {
     @include flex;
     height: 100vh;
     width: 100vw;
 }
-.archive__wrapper
+.modnotes__wrapper
 {
     height: 100%;
     width: 100%;
 }
 
-.archive__container
+.modnotes__container
 {
     width: 80%;
     height: 80%;
     margin: 0 auto;
     padding: 5rem 0;
-   
+    @include flex;
+    justify-content: left;
+    align-items: flex-start;
 }
-.archive__empty
+.modnotes__empty
 {
     @include flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
-    .archive__empty-icon
+    .modnotes__empty-icon
     {
         font-size: 10rem;
         color:#333;
         opacity: 0.4;
     }
-
-    .archive__empty-text
+ 
+    .modnotes__empty-text
     {
         font-size: 2rem;
         padding-top: 2rem;
         opacity: 0.5;
     }
 }
-.archive__container--center
+.modnotes__container--center
 {
     justify-content: center;
 }

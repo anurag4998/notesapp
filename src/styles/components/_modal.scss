@@ -11,21 +11,16 @@
 
 .modal__wrapper {
   position: fixed;
-  width: 50%;
+  width: 40%;
   height: fit-content;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9000;
-  padding: 0 0 0 15px;
   border-radius: 10px;
 }
 
-.modal-btn {
-  position: absolute;
-  right: 15px;
-  bottom: 1px;
-}
+
 .modal--display-block {
   display: block;
   opacity: 1;
@@ -49,16 +44,21 @@
   word-wrap: break-word;
   white-space: pre-wrap;
   padding: 5px;
-  overflow-y: hidden;
+  overflow-y: none;
 }
 .modal__edit-title {
   font-size: 2rem;
-  min-height: 2rem;
-  max-height: 10rem;
+  min-height: 5rem;
+  max-height: 6rem;
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+
 }
 .modal__edit-description {
-  min-height: 15rem;
-  max-height: 50vh;
+  min-height: 9rem;
+  max-height: 30vh;
+  padding-left: 1.5rem;
+
 }
 
 .modal--isScrollable {
@@ -74,6 +74,9 @@
   min-height: 3rem;
   margin-top: 1rem;
   bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+
 }
 .modal__footer-btn
 {
@@ -89,4 +92,20 @@
 {
   left: 2.5%;
   bottom: 3rem;
+}
+
+.modal-btn {
+  position: absolute;
+  right: 15px;
+  bottom: 1px;
+  outline: none;
+  background: none;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.modal-btn:hover
+{
+  background-color: #eee;
 }
