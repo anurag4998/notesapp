@@ -1,24 +1,29 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import Note from './note'
+import { MdDelete } from "react-icons/md";
 
 const Deleted = () => {
     let deletedNotes = useSelector((state) => {
-        let notes = state.notes.notes.filter(x => x.id !== null)
+        let notes = state.notes.notes.filter(x => x.id !== null && x.isDeleted === true)
         return notes;
     })
     return(
         <Fragment>
-          <div className = 'archive'>
-                <div className = 'archive__wrapper'>
-                    <div className = 'archive__container'>
+          <div className = 'modnotes'>
+                <div className = 'modnotes__wrapper'>
+                    <div className = 'modnotes__container'>
                             {deletedNotes.length > 0 ? deletedNotes.filter( x => x.isDeleted === true).map( (note,index) => {
                                     return(
                                         <div key = {index}>
                                             <Note noteprops = {note} />
                                         </div>
                                     )  
-                            }):undefined}
+                            }):<div className = 'modnotes__empty modnotes__container--center' >
+                                    <MdDelete className = 'modnotes__empty-icon'/>
+                                    <h1  className = 'modnotes__empty-text'> Trashed Notes will be removed in 7 days</h1>
+                                </div>
+                            }
                     </div>
                  </div>
             </div>

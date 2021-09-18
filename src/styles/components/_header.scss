@@ -1,0 +1,52 @@
+.header
+{
+    @include flex;
+    justify-content: space-between;
+    height: 6rem;
+    padding: 0.8rem 0;
+    border-bottom: 0.1rem solid #e1e1e1;
+    .header__logo 
+    {
+        flex: 0 0 15%;
+        @include flex;
+        justify-content: left;
+        padding-left: 2.5rem;
+        .header__logo--icon
+        {
+            font-size: 3rem;
+            margin: 1rem 1rem;
+            margin-top: 2rem;
+        }
+        .header__logo--text
+        {
+            font-size: 2rem;
+            margin-top: 0.5rem;
+
+        }
+    }
+    .header__search
+    {
+        flex:  0 0 70%;
+        height: 100%;
+    }
+    .header__account
+    {
+        flex: 0 0 15%;
+        display: flex;
+        justify-content: right;
+        padding-right: 6rem;
+
+        button 
+        {
+            padding:1rem;
+            color: floralwhite;
+            background-color: blue;
+            outline: none;
+            border: none;
+            border-radius: 0.2rem;
+            font-weight: 500;
+            cursor: pointer;
+
+        }
+    }
+}

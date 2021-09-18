@@ -42,9 +42,16 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return {
-    notes: state.notes.notes,
-  };
+  
+  //console.log(state)
+  if(state.notes.filteredText)
+    return {
+      notes: state.notes.notes.filter(x => x.description.toString().includes(state.notes.filteredText)),
+    };
+  else
+    return {
+      notes: state.notes.notes
+    };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
