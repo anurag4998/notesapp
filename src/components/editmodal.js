@@ -74,22 +74,56 @@ const EditModal = (props) => {
       let triggerer = event.target.id;
       let element = document.getElementById(triggerer);
       let style = window.getComputedStyle(element);
-      let length =
-        parseInt(style.height.substring(0, style.height.length - 2)) + 20;
+      let length = parseInt(style.height.substring(0, style.height.length - 2)) + 20;
       element.style.height = length + "px";
-      if (length > 80) setShowScroll(true);
-      else setShowScroll(false);
+      console.log(length)
+      if (length > 140) 
+          setShowScroll(true);
     }
-
-    if(event.key === "Backspace")
+    if(event.which === 8 && event.type === "keydown")
     {
-      console.log(2);
-    }
-    if(event.key === "Backspace" && event.type === "keyup" )
-    {
-            console.log("keyup");
+      let element = document.getElementById(event.target.id);
+      let style = window.getComputedStyle(element);
+      let lines = event.target.value.split('\n')
+      //console.log(lines);
+      var cursorPosition = event.target.selectionStart
+      //console.log(cursorPosition);
+      let cummulativePosition = 0;
+      for(let i = 0; i < lines.length; i++)
+        {
+            cummulativePosition += lines[i].length;
+            if(cursorPosition <= cummulativePosition )
+              {
+                if(!lines[i] && i!==0)
+                 {
+                  
+                  let length = parseInt(style.height.substring(0, style.height.length - 2)) - 20;
+                  element.style.height = length + "px";
+                  if(length<140)
+                    setShowScroll(false); 
 
+                 }
+                break;
+              }
+            cummulativePosition++;  // -n
+        }
     }
+    // if(event.which === 8 && event.type === "keyup")
+    // {
+
+    //   let lines = event.target.value.split('\n')
+    //   //console.log(lines);
+    //   // if(!lines[lines.length - 1]) {
+    //   //     $this.attr('rows', rows - 1);
+    //   // }
+    //   var cursorPosition = event.target.selectionStart
+    //   console.log(cursorPosition);
+    // }
+    // if(event.key === "Backspace" && event.type === "keyup" )
+    // {
+    //         console.log("keyup");
+
+    // }
   };
   return (
     <div
@@ -102,6 +136,7 @@ const EditModal = (props) => {
           id={"edittitle" + props.noteprops._id}
           onKeyDown={handleKeyPress}
           placeholder="Title"
+          rows = "5"
           className={`${
             showScroll
               ? `modal__edit-title modal--editable modal--isScrollable ${props.noteprops.color}`
