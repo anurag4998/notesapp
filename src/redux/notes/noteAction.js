@@ -162,7 +162,7 @@ export const startCopyNote = (note) => {
   return async (dispatch) => {
     let token = await readToken();
     note.createdAt = Date.now();
-    note.order = 0;
+    note.order = 1;
     try {
       let noteCreated = await axios.post( devUrl + "notes/copy", note, {
         headers: {
