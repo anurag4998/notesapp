@@ -27,10 +27,26 @@
 }
 
 .notes-container {
-    margin: 50px auto;
+    margin: 1rem 5rem;
     width: 80%;
     display: flex;
     justify-content: left;
     align-items: center;
     flex-wrap: wrap;
+  }
+
+  .notes-isPinned
+  {
+      margin: 2rem 5rem 2rem 5rem ;
+      flex-direction: row;
+      justify-content: left;
+      align-items: flex-start;
+      position: relative;
+      padding-top: 1.5rem;
+      h4 
+      {
+          position: absolute;
+          left:2rem;
+          top: 0.7rem;
+      }
   }
