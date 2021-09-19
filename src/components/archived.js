@@ -17,7 +17,7 @@ const Archived = () => {
     return(
         <Fragment>
           <div className = 'modnotes'>
-                <div className = 'modnotes__wrapper'>
+            <div className = {archivedNotes.length > 0 ? 'modnotes__wrapper modnotes__wrapper--top' : 'modnotes__wrapper' }>
                     <div className = 'modnotes__container'>
                             {archivedNotes.length > 0 ? archivedNotes.filter(x => x.isArchived === true ).map( (note,index) => {
                                     return(

@@ -11,13 +11,14 @@ const Deleted = () => {
     return(
         <Fragment>
           <div className = 'modnotes'>
-                <div className = 'modnotes__wrapper'>
-                    <div className = 'modnotes__container'>
+                <div className = { deletedNotes.length > 0 ? 'modnotes__wrapper modnotes__wrapper--top' : 'modnotes__wrapper' }>
+                    <div className = "modnotes__container">
                             {deletedNotes.length > 0 ? deletedNotes.filter( x => x.isDeleted === true).map( (note,index) => {
+
                                     return(
-                                        <div key = {index}>
-                                            <Note noteprops = {note} />
-                                        </div>
+                                            <div key = {index}>
+                                                <Note noteprops = {note} />
+                                             </div>
                                     )  
                             }):<div className = 'modnotes__empty modnotes__container--center' >
                                     <MdDelete className = 'modnotes__empty-icon'/>
@@ -26,7 +27,7 @@ const Deleted = () => {
                             }
                     </div>
                  </div>
-            </div>
+                </div>
         </Fragment>
     )
 }

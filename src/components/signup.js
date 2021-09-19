@@ -53,7 +53,7 @@ const Signup = ()  => {
 
     return(
 
-        <section>
+        <section className = 'signup'>
         <div className = 'signup__wrapper'>
              <div className = 'signup__container'>    
                 <h1 className='signup__form__heading'>Signup</h1>
