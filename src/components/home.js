@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { fetchNotes, startSwapNote } from "../redux";
 import { connect } from "react-redux";
 import Note from "./note";
+import notereducer from "../redux/notes/noteReducer";
 
 const Home = (props) => {
   const [dragId, setDragId] = useState();
@@ -17,11 +18,31 @@ const Home = (props) => {
   }, []);
   return (
     <Fragment>
+
+      <div className = "notes-container notes-isPinned">
+      {
+        props.notes.length > 0
+          ?props.notes
+            .sort((a, m) => a.order - m.order)
+            .filter((x) => x.isArchived === false && x.isDeleted === false && x.isPinned === true)
+            .map((note,index) => {
+              return (
+                <Fragment>
+                  {index === 0 ? <h4 key = "pinned">PINNED</h4> : undefined}
+                  <div key = {index} id = {note._id}>
+                      <Note noteprops={note} />
+                  </div>
+                </Fragment>
+              )
+            })
+          :undefined
+      }
+      </div>
       <div className="notes-container">
         {props.notes.length > 0
           ? props.notes
               .sort((a, m) => a.order - m.order)
-              .filter((x) => x.isArchived === false && x.isDeleted === false)
+              .filter((x) => x.isArchived === false && x.isDeleted === false && x.isPinned === false) 
               .map((note, index) => {
                 return (
                   <div
