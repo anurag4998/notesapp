@@ -68,7 +68,7 @@ export const startAddNote = (notes) => {
         },
       });
       noteCreated = noteCreated.data;
-      dispatch(addNote({ id: noteCreated._id, ...noteCreated }));
+      dispatch(addNote({ ...noteCreated }));
     } catch (e) {
       console.log(e);
     }
@@ -94,6 +94,7 @@ export const fetchNotes = () => {
 
 export const StartEditNote = (id, updates) => {
   return async (dispatch) => {
+    console.log(id);
     let token = await readToken();
     try {
       await axios.put(prodUrl + "notes", {
@@ -161,19 +162,18 @@ export const startCopyNote = (note) => {
   return async (dispatch) => {
     let token = await readToken();
     note.createdAt = Date.now();
-    delete note._id;
-    console.log(note) 
-    // try {
-    //   let noteCreated = await axios.post("http://localhost:5000/notes", note, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    //   noteCreated = noteCreated.data;
-    //   dispatch(addNote({ id: noteCreated._id, ...noteCreated }));
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    note.order = 0;
+    try {
+      let noteCreated = await axios.post("http://localhost:5000/notes/copy", note, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      noteCreated = noteCreated.data;
+      dispatch(addNote({ ...noteCreated }));
+    } catch (e) {
+      console.log(e);
+    }
   }
  
 
