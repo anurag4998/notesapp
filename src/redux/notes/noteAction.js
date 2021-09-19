@@ -164,7 +164,7 @@ export const startCopyNote = (note) => {
     note.createdAt = Date.now();
     note.order = 0;
     try {
-      let noteCreated = await axios.post("http://localhost:5000/notes/copy", note, {
+      let noteCreated = await axios.post( devUrl + "notes/copy", note, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
