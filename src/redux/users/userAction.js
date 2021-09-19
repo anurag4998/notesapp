@@ -40,7 +40,7 @@ export const startSignup = (user) => {
   return async (dispatch) => {
     try {
       dispatch(loadData());
-      let created = await axios.post(prodUrl + "user/signup", {
+      let created = await axios.post(devUrl + "user/signup", {
         user,
       });
       const jwt = created.data.token;
@@ -57,7 +57,7 @@ export const startLogin = ({email, password}) => {
   return async (dispatch) => {
     try {
       dispatch(loadData());
-      let User = await axios.post(prodUrl + "user/login", {
+      let User = await axios.post(devUrl + "user/login", {
         email,password
       });
       const jwt = User.data.token;
@@ -83,7 +83,7 @@ export const logout = () => {
   return async (dispatch) => {
       try {
         let token = await readToken();
-        await axios.post( prodUrl + "user/logout",{token},{
+        await axios.post( devUrl + "user/logout",{token},{
           headers: {
             Authorization: `Bearer ${token}`,
           },

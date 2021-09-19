@@ -62,7 +62,7 @@ export const startAddNote = (notes) => {
       deletedAt: null,
     };
     try {
-      let noteCreated = await axios.post( prodUrl + "notes", note, {
+      let noteCreated = await axios.post( devUrl + "notes", note, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -79,7 +79,7 @@ export const fetchNotes = () => {
   return async (dispatch) => {
     let token = await readToken();
     try {
-      let notes = await axios.get(prodUrl + "notes", {
+      let notes = await axios.get(devUrl + "notes", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -96,7 +96,7 @@ export const StartEditNote = (id, updates) => {
   return async (dispatch) => {
     let token = await readToken();
     try {
-      await axios.put(prodUrl + "notes", {
+      await axios.put(devUrl + "notes", {
         id,
         updates,
       },{
@@ -116,7 +116,7 @@ export const startDeletePermanently = (id) => {
     let token = await readToken();
     try {
       console.log(id);
-        await axios.delete(prodUrl + "notes/" + id,{
+        await axios.delete(devUrl + "notes/" + id,{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -133,7 +133,7 @@ export const startSwapNote = (draggedID, droppedID) => {
     let token = await readToken();
     try {
       console.log(draggedID, droppedID);
-      let note = await axios.put(prodUrl + "notes/reorder", {
+      let note = await axios.put(devUrl + "notes/reorder", {
         draggedID,
         droppedID,
       },{
