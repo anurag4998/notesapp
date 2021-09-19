@@ -137,6 +137,7 @@ const EditModal = (props) => {
           onKeyDown={handleKeyPress}
           placeholder="Title"
           rows = "5"
+          disabled = {props.noteprops.isDeleted}
           className={`${
             showScroll
               ? `modal__edit-title modal--editable modal--isScrollable ${props.noteprops.color}`
@@ -149,6 +150,7 @@ const EditModal = (props) => {
           onKeyDown={handleKeyPress}
           onKeyUp = {handleKeyPress}
           placeholder="Add your note here"
+          disabled = {props.noteprops.isDeleted}
           className={`${
             showScroll
               ? `modal__edit-description modal--editable modal--isScrollable ${props.noteprops.color}`
