@@ -1,4 +1,4 @@
-import React, { useEffect,Fragment } from 'react';
+import React, { useEffect,Fragment , } from 'react';
 import Dashboard from '../components/dashboard'
 import Archived from '../components/archived'
 import Sidebar from '../components/sidebar'
@@ -13,15 +13,18 @@ import { BrowserRouter, Route, Switch,Redirect } from "react-router-dom";
 
 const Wrapper = () => { 
   const dispatch = useDispatch();
+  
+
   useEffect(() => {
     dispatch(checkLoggedStatus());
   }, [])
   
   let isLogged = useSelector((state) => {
     return state.user.loggedIn;
-})
+  })
   return (
-    <BrowserRouter>
+     
+      <BrowserRouter>
       <Switch>
 
               <Route exact path = "/">
