@@ -33,7 +33,7 @@ const Login = () => {
         let password = e.target.password.value.trim();
         dispatch(startLogin({email,password}));
         setShowError(true)
-        setDisabled(true)
+        setDisabled(false)
         setTimeout( () => setShowError(false) , 3000 )
     };
   

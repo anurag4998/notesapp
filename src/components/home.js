@@ -29,7 +29,7 @@ const Home = (props) => {
               return (
                 <Fragment>
                   {index === 0 ? <h4 key = "pinned">PINNED</h4> : undefined}
-                  <div key = {index} id = {note._id}>
+                  <div key = {note._id} id = {note._id}>
                       <Note noteprops={note} />
                   </div>
                 </Fragment>
